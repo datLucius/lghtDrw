@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="style.css">
     <script type="text/javascript" src="node_modules/paper/dist/paper-full.js"></script>
     <script type="text/paperscript" canvas="canvas">
+        var dump = document.getElementById('dump')
         var path;
         var minSize = 5;
         // var width = canvasBody.style.width
@@ -23,6 +24,7 @@
           console.log(myProject);
         }
         setInterval(function(){runTime()}, 100)
+
 
         function onMouseDrag(event) {
             // If the user dragged more then minSize:
@@ -63,8 +65,9 @@
                     event.point.x = event.point.x + time
                     path.add(event.point);
                     path.closed = true;
-                    var myProject = project.exportJSON()
-                    console.log(myProject)
+                    path.smooth();
+                    var myProject = project.exportSVG()
+                    dump.appendChild(myProject)
                     project.activeLayer.removeChildren();
 
                     // Set path to null (nothing) so the path check above
@@ -79,12 +82,11 @@
                 event.point.x = event.point.x + time
                 path.add(event.point);
                 path.closed = true;
+                path.smooth();
                 console.log(path.point)
-
-                var myProject = project.exportJSON()
-                console.log(myProject)
+                var myProject = project.exportSVG()
+                dump.appendChild(myProject)
                 project.activeLayer.removeChildren();
-
                 // Set path to null (nothing) so the path check above
                 // will force a new path next time the user drags fast enough:
                 path = null;
@@ -95,6 +97,7 @@
 <body>
     <div id="viewPort" style="width:100%;position:fixed;top:0;left:0;bottom:0;padding:40px;background-color:black;">
         <canvas id="canvas" resize style="position:fixed;top:0;bottom:0;right:0;width:1200px;background-color:white;"></canvas>
+        <div id="dump"></div>
     </div>
 </body>
 </html>
