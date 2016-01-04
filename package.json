@@ -1,0 +1,15 @@
+{
+  "name": "light-draw",
+  "version": "1.0.0",
+  "description": "scrolling drawing app",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lucius",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.4.8",
+    "paper": "^0.9.25"
+  }
+}
